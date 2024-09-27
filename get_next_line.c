@@ -15,15 +15,16 @@
 
 char	*get_next_line(int fd)
 {
-	char			*text;
-	static char		*buff = 0;
-	static ssize_t	bread = 1;
-	char			*pos;
-	char			*out;
+	char		*text;
+	static char	*buff = 0;
+	ssize_t		bread;
+	char		*pos;
+	char		*out;
 
 	if (!buff)
 		buff = (char *)ft_calloc(1, 1);
 	text = ft_strdup(buff);
+	bread = 1;
 	while (bread > 0)
 	{
 		pos = ft_strchr(text, '\n');
