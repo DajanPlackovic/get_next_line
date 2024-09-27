@@ -76,3 +76,25 @@ char	*ft_strdup(const char *s)
 	}
 	return (out);
 }
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*out;
+	size_t	slen;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	slen = ft_strlen(s);
+	out = (char *)ft_calloc(len + 1, 1);
+	if (!out)
+		return (NULL);
+	s += start;
+	i = 0;
+	while (i < len + 1)
+	{
+		out[i] = s[i];
+		i++;
+	}
+	return (out);
+}
