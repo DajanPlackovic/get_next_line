@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include "get_next_line.h"
 
 size_t	ft_strlen(const char *s);
 void	*ft_calloc(size_t nmemb, size_t size);
