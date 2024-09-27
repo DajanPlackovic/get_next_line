@@ -49,7 +49,11 @@ char	*get_next_line(int fd)
 	static char	*buff = 0;
 
 	if (fd < 0 || read(fd, buff, 0) == -1)
+	{
+		if (buff)
+			free(buff);
 		return (NULL);
+	}
 	if (!buff)
 		buff = (char *)ft_calloc(1, 1);
 	text = ft_strdup(buff);
