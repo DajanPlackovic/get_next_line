@@ -29,8 +29,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	s1_len = ft_strlen(s1) + 1;
-	total_len = s1_len + ft_strlen(s2);
+	s1_len = ft_strlen(s1);
+	total_len = s1_len + ft_strlen(s2) + 1;
 	out = (char *)ft_calloc(total_len, 1);
 	if (!out)
 		return (NULL);
