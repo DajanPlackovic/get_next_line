@@ -77,7 +77,7 @@ char	*handle_line(int fd, char *text, char **buff)
 		free(*buff);
 		*buff = NULL;
 	}
-	if (text)
+	if (text[0])
 		return (text);
 	return (NULL);
 }
