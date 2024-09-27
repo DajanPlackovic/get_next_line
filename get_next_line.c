@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
 #include <stdlib.h>
 #include <unistd.h>
-#include "get_next_line.h"
 
 size_t	ft_strlen(const char *s);
 void	*ft_calloc(size_t nmemb, size_t size);
-char	*ft_strchr(const char *s, char c);
+int		ft_strchr(const char *s, char c);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 
@@ -51,18 +51,17 @@ char	*ft_strjoin(char const *s1, char const *s2)
 char	*handle_line(int fd, char *text, char **buff)
 {
 	ssize_t	bread;
-	char	*pos;
+	int		pos;
 	char	*out;
 
 	bread = 1;
 	while (bread > 0)
 	{
 		pos = ft_strchr(text, '\n');
-		if (pos)
+		if (pos + 1)
 		{
-			out = ft_substr(text, 0, pos - text);
-			*buff = ft_substr(text, pos - text + 1, ft_strlen(text) - (pos
-						- text));
+			out = ft_substr(text, 0, pos);
+			*buff = ft_substr(text, pos + 1, ft_strlen(text) - pos);
 			free(text);
 			return (out);
 		}

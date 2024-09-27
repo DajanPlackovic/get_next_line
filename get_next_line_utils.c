@@ -44,7 +44,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return ((void *)out);
 }
 
-char	*ft_strchr(const char *s, char c)
+int	ft_strchr(const char *s, char c)
 {
 	size_t	i;
 	size_t	len;
@@ -54,8 +54,8 @@ char	*ft_strchr(const char *s, char c)
 	while (i < len && s[i] != c)
 		i++;
 	if (i == len)
-		return (NULL);
-	return ((void *)(s + i));
+		return (-1);
+	return (i);
 }
 
 char	*ft_strdup(const char *s)
