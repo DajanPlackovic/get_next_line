@@ -10,9 +10,42 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
 #include <sys/types.h>
 #include <unistd.h>
+
+size_t	ft_strlen(const char *s);
+void	*ft_calloc(size_t nmemb, size_t size);
+char	*ft_strchr(const char *s, char c);
+char	*ft_strdup(const char *s);
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*out;
+	int		s1_len;
+	int		total_len;
+	size_t	i;
+
+	if (!s1 || !s2)
+		return (NULL);
+	s1_len = ft_strlen(s1) + 1;
+	total_len = s1_len + ft_strlen(s2);
+	out = (char *)ft_calloc(total_len, 1);
+	if (!out)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		out[i] = s1[i];
+		i++;
+	}
+	while (s2[i])
+	{
+		out[s1_len + i] = s2[i];
+		i++;
+	}
+	return (out);
+}
 
 char	*handle_line(int fd, char *text, char **buff)
 {
