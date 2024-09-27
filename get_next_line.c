@@ -60,9 +60,9 @@ char	*handle_line(int fd, char *text, char **buff)
 		pos = ft_strchr(text, '\n');
 		if (pos)
 		{
-			out = ft_substr(text, 0, pos - text + 1);
+			out = ft_substr(text, 0, pos - text);
 			*buff = ft_substr(text, pos - text + 1, ft_strlen(text) - (pos
-						- text + 1));
+						- text));
 			free(text);
 			return (out);
 		}

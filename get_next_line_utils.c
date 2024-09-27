@@ -84,7 +84,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	out = (char *)ft_calloc(len + 1, 1);
+	out = (char *)ft_calloc(len + 2, 1);
 	if (!out)
 		return (NULL);
 	s += start;
