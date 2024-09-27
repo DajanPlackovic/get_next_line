@@ -50,7 +50,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (out);
 }
 
-char	*extract_line(int fd, char *text, char **buff)
+char	*extract_line(int fd, char **text, char **buff)
 {
 	ssize_t	bread;
 	int		pos;
@@ -59,18 +59,18 @@ char	*extract_line(int fd, char *text, char **buff)
 	bread = 1;
 	while (bread > 0)
 	{
-		pos = ft_strchr(text, '\n');
+		pos = ft_strchr(*text, '\n');
 		if (pos + 1)
 		{
-			out = ft_substr(text, 0, pos);
-			*buff = ft_substr(text, pos + 1, ft_strlen(text) - pos);
-			free(text);
+			out = ft_substr(*text, 0, pos);
+			*buff = ft_substr(*text, pos + 1, ft_strlen(*text) - pos);
+			free(*text);
 			return (out);
 		}
 		else
 		{
 			bread = read(fd, *buff, BUFFER_SIZE);
-			text = ft_strjoin(text, *buff);
+			*text = ft_strjoin(*text, *buff);
 		}
 	}
 	return (NULL);
@@ -80,7 +80,7 @@ char	*handle_line(int fd, char *text, char **buff)
 {
 	char	*out;
 
-	out = extract_line(fd, text, buff);
+	out = extract_line(fd, &text, buff);
 	if (out)
 		return (out);
 	if (*buff)
