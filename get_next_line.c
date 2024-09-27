@@ -45,6 +45,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		out[s1_len + i] = s2[i];
 		i++;
 	}
+	free((void *)s1);
 	return (out);
 }
 
