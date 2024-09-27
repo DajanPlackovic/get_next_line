@@ -48,7 +48,7 @@ char	*get_next_line(int fd)
 	char		*text;
 	static char	*buff = 0;
 
-	if (fd < 0 || read(fd, buff, 0) == -1)
+	if (fd < 0 || read(fd, buff, 0) == -1 || BUFFER_SIZE <= 0)
 	{
 		if (buff)
 			free(buff);
