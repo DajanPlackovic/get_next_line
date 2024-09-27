@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -49,7 +50,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (out);
 }
 
-char	*handle_line(int fd, char *text, char **buff)
+char	*extract_line(int fd, char *text, char **buff)
 {
 	ssize_t	bread;
 	int		pos;
@@ -72,6 +73,16 @@ char	*handle_line(int fd, char *text, char **buff)
 			text = ft_strjoin(text, *buff);
 		}
 	}
+	return (NULL);
+}
+
+char	*handle_line(int fd, char *text, char **buff)
+{
+	char	*out;
+
+	out = extract_line(fd, text, buff);
+	if (out)
+		return (out);
 	if (*buff)
 	{
 		free(*buff);
