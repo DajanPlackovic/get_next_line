@@ -21,6 +21,8 @@ char	*get_next_line(int fd)
 	char		*pos;
 	char		*out;
 
+	if (fd < 0 || read(fd, buff, 0) == -1)
+		return (NULL);
 	if (!buff)
 		buff = (char *)ft_calloc(1, 1);
 	text = ft_strdup(buff);
