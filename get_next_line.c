@@ -72,15 +72,20 @@ char	*handle_line(int fd, char *text, char **buff)
 			text = ft_strjoin(text, *buff);
 		}
 	}
-	free(text);
-	free(*buff);
+	if (*buff)
+	{
+		free(*buff);
+		*buff = NULL;
+	}
+	if (text)
+		return (text);
 	return (NULL);
 }
 
 char	*get_next_line(int fd)
 {
 	char		*text;
-	static char	*buff = 0;
+	static char	*buff = NULL;
 
 	if (fd < 0 || read(fd, buff, 0) == -1 || BUFFER_SIZE <= 0)
 	{
