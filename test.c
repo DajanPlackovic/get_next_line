@@ -1,8 +1,8 @@
-#include "libft.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+void	ft_putstr_fd(char *s, int fd);
 
 char	*get_next_line(int fd);
 

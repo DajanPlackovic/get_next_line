@@ -11,3 +11,95 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+
+t_list			*ft_lstnew(void *content);
+void			ft_lstadd_back(t_list **lst, t_list *new);
+void			ft_lstclear(t_list **lst, void (*del)(void *));
+int				ft_lstsize(t_list *lst);
+size_t			ft_strlen(const char *s);
+
+char	*build_line(t_list **buffer, t_list *last)
+{
+	char	*line;
+	size_t	size;
+	size_t	i;
+	size_t	j;
+	t_list	*curr;
+
+	size = ft_lstsize(*buffer) * BUFFER_SIZE + ft_strlen(last->content) + 1;
+	line = (char *)malloc(size);
+	if (!line)
+	{
+		ft_lstclear(buffer, free);
+		free(last->content);
+		free(last);
+		return (NULL);
+	}
+	curr = *buffer;
+	j = 0;
+	while (curr)
+	{
+		i = 0;
+		while (curr->content[i])
+		{
+			i++;
+		}
+		j++;
+	}
+	return (line);
+}
+
+static t_list	*read_into_buffer(int fd, t_list **buffer)
+{
+	t_list	*curr;
+	t_list	*prev;
+	char	*content;
+	ssize_t	bread;
+
+	while (1)
+	{
+		content = (char *)malloc(BUFFER_SIZE + 1);
+		if (!content)
+		{
+			ft_lstclear(buffer, free);
+			return (NULL);
+		}
+		bread = -1;
+		while (++bread < BUFFER_SIZE + 1)
+			content[bread] = 0;
+		bread = read(fd, content, BUFFER_SIZE);
+		curr = ft_lstnew(content);
+		if (!curr)
+		{
+			free(content);
+			ft_lstclear(buffer, free);
+			return (NULL);
+		}
+		if (strchr(content, '\n') || bread == 0)
+			return (curr);
+		ft_lstadd_back(buffer, curr);
+	}
+}
+
+char	*get_next_line(int fd)
+{
+	static t_list	**buffer = NULL;
+	t_list			*last;
+
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (NULL);
+	if (!buffer)
+	{
+		buffer = (t_list **)malloc(sizeof(t_list *));
+		if (!buffer)
+			return (NULL);
+		buffer[0] = 0;
+	}
+	last = read_into_buffer(fd, buffer);
+	if (!last)
+		return (NULL);
+	return (build_line(buffer, last));
+}
