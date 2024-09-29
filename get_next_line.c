@@ -89,6 +89,28 @@ static int	read_file(int fd, char **buff, char **text)
 	return (1);
 }
 
+char	*extract_line(char **buff, char **text)
+{
+	char	*nl_pos;
+	char	*line;
+
+	nl_pos = strchr(*text, '\n');
+	if (nl_pos)
+	{
+		line = ft_substr(*text, 0, *text - nl_pos);
+		free(*buff);
+		*buff = ft_substr(*text, *text - nl_pos, BUFFER_SIZE);
+		free(*text);
+		return (line);
+	}
+	else
+	{
+		free(*buff);
+		*buff = NULL;
+		return (*text);
+	}
+}
+
 char	*get_next_line(int fd)
 {
 	ssize_t		bread;
@@ -102,7 +124,7 @@ char	*get_next_line(int fd)
 	if (!read_file(fd, &buff, &text))
 		return (NULL);
 	if (text[0])
-		return (text);
+		return (extract_line(&buff, &text));
 	free(text);
 	return (NULL);
 }
