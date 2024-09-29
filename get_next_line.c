@@ -102,12 +102,12 @@ char	*extract_line(char **buff, char **text)
 	nl_pos = ft_strchr_utils(*text, '\n');
 	if (nl_pos)
 	{
-		line = ft_substr_utils(*text, 0, *text - nl_pos + 1);
+		line = ft_substr_utils(*text, 0, nl_pos - *text + 1);
 		free(*buff);
 		if (!*(nl_pos + 1))
 			*buff = NULL;
 		else
-			*buff = ft_substr_utils(*text, *text - nl_pos + 1, BUFFER_SIZE);
+			*buff = ft_substr_utils(*text, nl_pos - *text + 1, BUFFER_SIZE);
 		free(*text);
 		return (line);
 	}
