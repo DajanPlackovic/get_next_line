@@ -15,7 +15,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (NULL);
+	return (NULL);
 }
