@@ -35,18 +35,12 @@ static char	*ft_strjoin_free(char **s1, char **s2)
 		free((void *)*s1);
 		return (NULL);
 	}
-	i = 0;
-	while ((*s1)[i])
-	{
+	i = -1;
+	while ((*s1)[++i])
 		out[i] = (*s1)[i];
-		i++;
-	}
-	i = 0;
-	while ((*s2)[i])
-	{
+	i = -1;
+	while ((*s2)[++i])
 		out[s1_len + i] = (*s2)[i];
-		i++;
-	}
 	free((void *)(*s1));
 	return (out);
 }
