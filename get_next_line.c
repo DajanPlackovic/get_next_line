@@ -36,10 +36,16 @@ static char	*ft_strjoin_free(char **s1, char **s2)
 	}
 	total_len = 0;
 	while (s1[total_len])
+	{
 		out[total_len] = (*s1)[total_len];
+		total_len++;
+	}
 	total_len = 0;
 	while (s2[total_len])
+	{
 		out[s1_len + total_len] = (*s2)[total_len];
+		total_len++;
+	}
 	free((void *)*s1);
 	return (out);
 }
