@@ -17,6 +17,7 @@
 
 size_t		ft_strlen_utils(const char *s);
 void		*ft_calloc_utils(size_t nmemb, size_t size);
+char		*ft_substr_utils(char const *s, unsigned int start, size_t len);
 
 static char	*ft_strjoin_free(char **s1, char **s2)
 {
@@ -49,7 +50,7 @@ static int	setup(char **buff, char **text)
 {
 	if (*buff)
 	{
-		*text = ft_substr(*buff, 0, BUFFER_SIZE);
+		*text = ft_substr_utils(*buff, 0, BUFFER_SIZE);
 		if (!*text)
 		{
 			free(*buff);
@@ -103,9 +104,9 @@ char	*extract_line(char **buff, char **text)
 	nl_pos = ft_strchr(*text, '\n');
 	if (nl_pos)
 	{
-		line = ft_substr(*text, 0, *text - nl_pos);
+		line = ft_substr_utils(*text, 0, *text - nl_pos);
 		free(*buff);
-		*buff = ft_substr(*text, *text - nl_pos, BUFFER_SIZE);
+		*buff = ft_substr_utils(*text, *text - nl_pos, BUFFER_SIZE);
 		free(*text);
 		return (line);
 	}

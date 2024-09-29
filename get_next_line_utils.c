@@ -42,3 +42,26 @@ void	*ft_calloc_utils(size_t nmemb, size_t size)
 	}
 	return ((void *)out);
 }
+
+char	*ft_substr_utils(char const *s, unsigned int start, size_t len)
+{
+	char	*out;
+	size_t	slen;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	slen = ft_strlen_utils(s);
+	if (len > slen - start)
+		len = slen - start;
+	out = (char *)ft_calloc_utils(len + 1, 1);
+	if (!out)
+		return (NULL);
+	i = 0;
+	while (start + i <= len)
+	{
+		out[i] = s[start + i];
+		i++;
+	}
+	return (out);
+}
