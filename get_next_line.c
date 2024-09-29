@@ -104,7 +104,10 @@ char	*extract_line(char **buff, char **text)
 	{
 		line = ft_substr_utils(*text, 0, *text - nl_pos + 1);
 		free(*buff);
-		*buff = ft_substr_utils(*text, *text - nl_pos + 1, BUFFER_SIZE);
+		if (!*(nl_pos + 1))
+			*buff = NULL;
+		else
+			*buff = ft_substr_utils(*text, *text - nl_pos + 1, BUFFER_SIZE);
 		free(*text);
 		return (line);
 	}
