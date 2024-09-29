@@ -21,3 +21,24 @@ size_t	ft_strlen_utils(const char *s)
 		i++;
 	return (i);
 }
+
+void	*ft_calloc_utils(size_t nmemb, size_t size)
+{
+	size_t			prod;
+	unsigned char	*out;
+	size_t			i;
+
+	prod = nmemb * size;
+	if (nmemb && prod / nmemb != size)
+		return (NULL);
+	out = malloc(prod);
+	if (!out)
+		return (NULL);
+	i = 0;
+	while (i < prod)
+	{
+		((unsigned char *)out)[i] = 0;
+		i++;
+	}
+	return ((void *)out);
+}

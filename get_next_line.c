@@ -16,6 +16,7 @@
 #include <unistd.h>
 
 size_t		ft_strlen_utils(const char *s);
+void		*ft_calloc_utils(size_t nmemb, size_t size);
 
 static char	*ft_strjoin_free(char **s1, char **s2)
 {
@@ -27,7 +28,7 @@ static char	*ft_strjoin_free(char **s1, char **s2)
 		return (NULL);
 	s1_len = ft_strlen_utils(*s1) + 1;
 	total_len = s1_len + ft_strlen_utils(*s2);
-	out = (char *)ft_calloc(total_len, 1);
+	out = (char *)ft_calloc_utils(total_len, 1);
 	if (!out)
 	{
 		free((void *)*s1);
@@ -53,9 +54,9 @@ static int	setup(char **buff, char **text)
 	}
 	else
 	{
-		*text = ft_calloc(1, 1);
+		*text = ft_calloc_utils(1, 1);
 	}
-	*buff = ft_calloc(BUFFER_SIZE, 1);
+	*buff = ft_calloc_utils(BUFFER_SIZE, 1);
 	if (!*buff)
 	{
 		free(text);
