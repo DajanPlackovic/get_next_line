@@ -36,7 +36,7 @@ static char	*ft_strjoin_free(char **s1, char **s2)
 	}
 	ft_strlcpy(out, *s1, s1_len);
 	ft_strlcat(out, *s2, total_len);
-	free((void *)*s1);
+	free((void *)(*s1));
 	return (out);
 }
 
