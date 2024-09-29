@@ -84,7 +84,7 @@ static int	read_file(int fd, char **buff, char **text)
 			return (0);
 		}
 		i = 0;
-		while ((*text)[i] && (*text)[i] == '\n')
+		while ((*text)[i] && (*text)[i] != '\n')
 			i++;
 		if ((*text)[i])
 			return (1);
