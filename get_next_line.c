@@ -96,15 +96,19 @@ static int	read_file(int fd, char **buff, char **text)
 
 char	*extract_line(char **buff, char **text)
 {
-	char	*nl_pos;
+	size_t	nl_pos;
 	char	*line;
 
-	nl_pos = ft_strchr(*text, '\n');
+	nl_pos = 0;
+	while (*text[nl_pos] && *text[nl_pos] != '\n')
+		nl_pos++;
+	if (!*text[nl_pos])
+		nl_pos = 0;
 	if (nl_pos)
 	{
-		line = ft_substr(*text, 0, *text - nl_pos);
+		line = ft_substr(*text, 0, nl_pos);
 		free(*buff);
-		*buff = ft_substr(*text, *text - nl_pos, BUFFER_SIZE);
+		*buff = ft_substr(*text, nl_pos, BUFFER_SIZE);
 		free(*text);
 		return (line);
 	}
