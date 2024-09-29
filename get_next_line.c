@@ -43,7 +43,7 @@ static int	setup(char **buff, char **text)
 {
 	if (*buff)
 	{
-		*text = strdup(*buff);
+		*text = ft_strdup(*buff);
 		if (!*text)
 		{
 			free(*buff);
@@ -53,9 +53,9 @@ static int	setup(char **buff, char **text)
 	}
 	else
 	{
-		*text = calloc(1, 1);
+		*text = ft_calloc(1, 1);
 	}
-	*buff = calloc(BUFFER_SIZE, 1);
+	*buff = ft_calloc(BUFFER_SIZE, 1);
 	if (!*buff)
 	{
 		free(text);
@@ -81,7 +81,7 @@ static int	read_file(int fd, char **buff, char **text)
 			buff = NULL;
 			return (0);
 		}
-		if (strchr(*text, '\n'))
+		if (ft_strchr(*text, '\n'))
 			return (1);
 	}
 	free(*buff);
@@ -94,7 +94,7 @@ char	*extract_line(char **buff, char **text)
 	char	*nl_pos;
 	char	*line;
 
-	nl_pos = strchr(*text, '\n');
+	nl_pos = ft_strchr(*text, '\n');
 	if (nl_pos)
 	{
 		line = ft_substr(*text, 0, *text - nl_pos);
