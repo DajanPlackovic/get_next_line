@@ -33,6 +33,7 @@ int	main(int argc, char *argv[])
 		test("1char.txt");
 		test("1line.txt");
 		test("morelines.txt");
+		test("1nl.txt");
 		test("onlynl.txt");
 	}
 	else {
