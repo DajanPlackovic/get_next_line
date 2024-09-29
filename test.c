@@ -11,6 +11,8 @@ void	test(char *file)
 	int		fd;
 	char	*text;
 
+	ft_putstr_fd(file, 1);
+	ft_putstr_fd("\n----\n", 1);
 	fd = open(file, O_RDONLY);
 	do
 	{
