@@ -105,9 +105,9 @@ char	*extract_line(char **buff, char **text)
 	nl_pos = ft_strchr_utils(*text, '\n');
 	if (nl_pos)
 	{
-		line = ft_substr_utils(*text, 0, *text - nl_pos);
+		line = ft_substr_utils(*text, 0, *text - nl_pos + 1);
 		free(*buff);
-		*buff = ft_substr_utils(*text, *text - nl_pos, BUFFER_SIZE);
+		*buff = ft_substr_utils(*text, *text - nl_pos + 1, BUFFER_SIZE);
 		free(*text);
 		return (line);
 	}
