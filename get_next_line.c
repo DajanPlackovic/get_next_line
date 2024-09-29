@@ -27,8 +27,8 @@ static char	*ft_strjoin_free(char **s1, char **s2)
 
 	if (!*s1 || !*s2)
 		return (NULL);
-	s1_len = ft_strlen_utils(*s1) + 1;
-	total_len = s1_len + ft_strlen_utils(*s2);
+	s1_len = ft_strlen_utils(*s1);
+	total_len = s1_len + ft_strlen_utils(*s2) + 1;
 	out = (char *)ft_calloc_utils(total_len, 1);
 	if (!out)
 	{
@@ -41,7 +41,12 @@ static char	*ft_strjoin_free(char **s1, char **s2)
 		out[i] = (*s1)[i];
 		i++;
 	}
-	ft_strlcat(out, *s2, total_len);
+	i = 0;
+	while ((*s2)[i])
+	{
+		out[s1_len + i] = (*s2)[i];
+		i++;
+	}
 	free((void *)(*s1));
 	return (out);
 }
