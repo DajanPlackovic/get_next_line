@@ -23,6 +23,7 @@ static char	*ft_strjoin_free(char **s1, char **s2)
 	char	*out;
 	int		s1_len;
 	int		total_len;
+	size_t	i;
 
 	if (!*s1 || !*s2)
 		return (NULL);
@@ -34,7 +35,12 @@ static char	*ft_strjoin_free(char **s1, char **s2)
 		free((void *)*s1);
 		return (NULL);
 	}
-	ft_strlcpy(out, *s1, s1_len);
+	i = 0;
+	while ((*s1)[i])
+	{
+		out[i] = (*s1)[i];
+		i++;
+	}
 	ft_strlcat(out, *s2, total_len);
 	free((void *)(*s1));
 	return (out);
