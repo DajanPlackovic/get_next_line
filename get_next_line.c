@@ -53,11 +53,14 @@ static int	setup(char **buff, char **text)
 	}
 	else
 	{
-		text = calloc(1, 1);
+		*text = calloc(1, 1);
 	}
 	*buff = calloc(BUFFER_SIZE, 1);
 	if (!*buff)
+	{
+		free(text);
 		return (0);
+	}
 	return (1);
 }
 
@@ -69,6 +72,8 @@ static int	read_file(int fd, char **buff, char **text)
 	while (bread > 0)
 	{
 		bread = read(fd, *buff, BUFFER_SIZE);
+		if (!bread)
+			break ;
 		*text = ft_strjoin_free(text, buff);
 		if (!*text)
 		{
@@ -79,6 +84,8 @@ static int	read_file(int fd, char **buff, char **text)
 		if (strchr(*text, '\n'))
 			return (1);
 	}
+	free(*buff);
+	*buff = NULL;
 	return (1);
 }
 
@@ -94,5 +101,8 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!read_file(fd, &buff, &text))
 		return (NULL);
+	if (text[0])
+		return (text);
+	free(text);
 	return (NULL);
 }
