@@ -6,7 +6,8 @@ norminette get_next_line_utils.c | awk '!/OK!$/'
 norminette get_next_line.h | awk '!/OK!$/'
 printf "%s " "Press enter to continue"
 read ans
-cc *.c -g -L. -lft
+cc *.c -g -L. -lft -D BUFFER_SIZE=$1
+shift
 # if there are no arguments
 if [ $# -eq 0 ]; then
 # run tests with all files
