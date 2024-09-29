@@ -9,3 +9,15 @@
 /*   Updated: 2024/09/26 11:32:01 by dplackov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
+
+size_t	ft_strlen_utils(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}

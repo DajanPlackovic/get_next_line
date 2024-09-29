@@ -12,10 +12,10 @@
 
 #include "get_next_line.h"
 #include "libft.h"
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
+
+size_t		ft_strlen_utils(const char *s);
 
 static char	*ft_strjoin_free(char **s1, char **s2)
 {
@@ -25,8 +25,8 @@ static char	*ft_strjoin_free(char **s1, char **s2)
 
 	if (!*s1 || !*s2)
 		return (NULL);
-	s1_len = ft_strlen(*s1) + 1;
-	total_len = s1_len + ft_strlen(*s2);
+	s1_len = ft_strlen_utils(*s1) + 1;
+	total_len = s1_len + ft_strlen_utils(*s2);
 	out = (char *)ft_calloc(total_len, 1);
 	if (!out)
 	{
