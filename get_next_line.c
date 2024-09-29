@@ -44,7 +44,7 @@ static int	setup(char **buff, char **text)
 {
 	if (*buff)
 	{
-		*text = ft_strdup(*buff);
+		*text = ft_substr(*buff, 0, BUFFER_SIZE);
 		if (!*text)
 		{
 			free(*buff);
