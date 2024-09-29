@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "libft.h"
-#include <stdlib.h>
-#include <unistd.h>
 
 size_t		ft_strlen_utils(const char *s);
 void		*ft_calloc_utils(size_t nmemb, size_t size);
@@ -121,7 +118,6 @@ char	*extract_line(char **buff, char **text)
 
 char	*get_next_line(int fd)
 {
-	ssize_t		bread;
 	static char	*buff = NULL;
 	char		*text;
 
