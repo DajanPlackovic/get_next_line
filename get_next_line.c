@@ -17,7 +17,15 @@
 
 char	*get_next_line(int fd)
 {
+	ssize_t		bread;
+	static char	buff[BUFFER_SIZE];
+
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
+	bread = 1;
+	while (bread > 0)
+	{
+		bread = read(fd, buff, BUFFER_SIZE);
+	}
 	return (NULL);
 }
