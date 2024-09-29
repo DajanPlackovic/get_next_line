@@ -130,5 +130,7 @@ char	*get_next_line(int fd)
 	if (text[0])
 		return (extract_line(&buff, &text));
 	free(text);
+	free(buff);
+	buff = NULL;
 	return (NULL);
 }
