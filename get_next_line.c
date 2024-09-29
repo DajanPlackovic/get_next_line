@@ -89,6 +89,7 @@ static int	setup(int fd, char **buff, char **text)
 		*buff = NULL;
 		return (1);
 	}
+	free(*buff);
 	*buff = ft_calloc_utils(BUFFER_SIZE + 1, 1);
 	if (!*buff)
 	{
