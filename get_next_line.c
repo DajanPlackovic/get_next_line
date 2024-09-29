@@ -82,7 +82,11 @@ static int	setup(int fd, char **buff, char **text)
 		}
 	}
 	else
+	{
 		*text = ft_calloc_utils(1, 1);
+		if (!*text)
+			return (0);
+	}
 	if (ft_strchr_utils(*text, '\n'))
 	{
 		free(*buff);
