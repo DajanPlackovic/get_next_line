@@ -16,33 +16,7 @@ size_t		ft_strlen_utils(const char *s);
 void		*ft_calloc_utils(size_t nmemb, size_t size);
 char		*ft_substr_utils(char const *s, unsigned int start, size_t len);
 char		*ft_strchr_utils(const char *s, char c);
-
-static char	*ft_strjoin_free(char **s1, char **s2)
-{
-	char	*out;
-	int		s1_len;
-	int		total_len;
-	size_t	i;
-
-	if (!*s1 || !*s2)
-		return (NULL);
-	s1_len = ft_strlen_utils(*s1);
-	total_len = s1_len + ft_strlen_utils(*s2) + 1;
-	out = (char *)ft_calloc_utils(total_len, 1);
-	if (!out)
-	{
-		free((void *)*s1);
-		return (NULL);
-	}
-	i = -1;
-	while ((*s1)[++i])
-		out[i] = (*s1)[i];
-	i = -1;
-	while ((*s2)[++i])
-		out[s1_len + i] = (*s2)[i];
-	free((void *)(*s1));
-	return (out);
-}
+char		*ft_strjoin_free(char **s1, char **s2);
 
 static int	read_file(int fd, char **buff, char **text)
 {
@@ -69,7 +43,7 @@ static int	read_file(int fd, char **buff, char **text)
 	return (1);
 }
 
-static int	setup(int fd, char **buff, char **text)
+static int	prep_text(char **buff, char **text)
 {
 	if (*buff)
 	{
@@ -87,6 +61,11 @@ static int	setup(int fd, char **buff, char **text)
 		if (!*text)
 			return (0);
 	}
+	return (1);
+}
+
+static int	prep_buff(int fd, char **text, char **buff)
+{
 	if (ft_strchr_utils(*text, '\n'))
 	{
 		free(*buff);
@@ -137,7 +116,9 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
-	if (!setup(fd, &buff, &text))
+	if (!prep_text(&buff, &text))
+		return (NULL);
+	if (!prep_buff(fd, &text, &buff))
 		return (NULL);
 	if (text[0])
 		return (extract_line(&buff, &text));
