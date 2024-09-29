@@ -44,31 +44,6 @@ static char	*ft_strjoin_free(char **s1, char **s2)
 	return (out);
 }
 
-static int	setup(char **buff, char **text)
-{
-	if (*buff)
-	{
-		*text = ft_substr_utils(*buff, 0, BUFFER_SIZE);
-		if (!*text)
-		{
-			free(*buff);
-			*buff = NULL;
-			return (0);
-		}
-	}
-	else
-	{
-		*text = ft_calloc_utils(1, 1);
-	}
-	*buff = ft_calloc_utils(BUFFER_SIZE + 1, 1);
-	if (!*buff)
-	{
-		free(text);
-		return (0);
-	}
-	return (1);
-}
-
 static int	read_file(int fd, char **buff, char **text)
 {
 	ssize_t	bread;
@@ -91,6 +66,37 @@ static int	read_file(int fd, char **buff, char **text)
 	}
 	free(*buff);
 	*buff = NULL;
+	return (1);
+}
+
+static int	setup(int fd, char **buff, char **text)
+{
+	if (*buff)
+	{
+		*text = ft_substr_utils(*buff, 0, BUFFER_SIZE);
+		if (!*text)
+		{
+			free(*buff);
+			*buff = NULL;
+			return (0);
+		}
+	}
+	else
+		*text = ft_calloc_utils(1, 1);
+	if (ft_strchr_utils(*text, '\n'))
+	{
+		free(*buff);
+		*buff = NULL;
+		return (1);
+	}
+	*buff = ft_calloc_utils(BUFFER_SIZE + 1, 1);
+	if (!*buff)
+	{
+		free(*text);
+		return (0);
+	}
+	if (!read_file(fd, buff, text))
+		return (0);
 	return (1);
 }
 
@@ -126,13 +132,8 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
-	if (!setup(&buff, &text))
+	if (!setup(fd, &buff, &text))
 		return (NULL);
-	if (!ft_strchr_utils(text, '\n'))
-	{
-		if (!read_file(fd, &buff, &text))
-			return (NULL);
-	}
 	if (text[0])
 		return (extract_line(&buff, &text));
 	free(text);
