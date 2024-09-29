@@ -68,7 +68,6 @@ static int	setup(char **buff, char **text)
 static int	read_file(int fd, char **buff, char **text)
 {
 	ssize_t	bread;
-	size_t	i;
 
 	bread = 1;
 	while (bread > 0)
@@ -83,10 +82,7 @@ static int	read_file(int fd, char **buff, char **text)
 			buff = NULL;
 			return (0);
 		}
-		i = 0;
-		while ((*text)[i] && (*text)[i] != '\n')
-			i++;
-		if ((*text)[i])
+		if (ft_strchr(*text, '\n'))
 			return (1);
 	}
 	free(*buff);
