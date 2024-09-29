@@ -1,0 +1,4 @@
+this is a test
+this is the second line
+this is the third line
+this last line is a little longer to check what happens when several iterations are necessary to get the whole line into the buffer, or rather whether the function is able to do so at all
