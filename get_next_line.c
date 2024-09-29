@@ -60,7 +60,7 @@ static int	setup(char **buff, char **text)
 	{
 		*text = ft_calloc_utils(1, 1);
 	}
-	*buff = ft_calloc_utils(BUFFER_SIZE, 1);
+	*buff = ft_calloc_utils(BUFFER_SIZE + 1, 1);
 	if (!*buff)
 	{
 		free(text);
