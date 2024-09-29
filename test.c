@@ -37,7 +37,8 @@ int	main(int argc, char *argv[])
 		test("onlynl.txt");
 	}
 	else {
-		test(argv[1]);
+		for (int i = 1; i < argc; i++)
+			test(argv[i]);
 	}
 	return (0);
 }
