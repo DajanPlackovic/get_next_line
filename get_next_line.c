@@ -128,8 +128,11 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!setup(&buff, &text))
 		return (NULL);
-	if (!read_file(fd, &buff, &text))
-		return (NULL);
+	if (!ft_strchr_utils(text, '\n'))
+	{
+		if (!read_file(fd, &buff, &text))
+			return (NULL);
+	}
 	if (text[0])
 		return (extract_line(&buff, &text));
 	free(text);
