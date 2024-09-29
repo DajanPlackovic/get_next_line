@@ -65,3 +65,15 @@ char	*ft_substr_utils(char const *s, unsigned int start, size_t len)
 	}
 	return (out);
 }
+
+char	*ft_strchr_utils(const char *s, char c)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] && s[i] != c)
+		i++;
+	if (!s[i])
+		return (NULL);
+	return ((char *)(s + i));
+}
