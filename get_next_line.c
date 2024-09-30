@@ -45,22 +45,37 @@ char	*build_line(t_list **buffer, t_list *last)
 		i = 0;
 		while (curr->content[i])
 		{
+			line[j] = curr->content[i];
 			i++;
+			j++;
 		}
+		curr = curr->next;
+	}
+	i = 0;
+	while (last->content[i])
+	{
+		line[j] = last->content[i];
+		i++;
 		j++;
 	}
+	line[j] = 0;
+	ft_lstclear(buffer, free);
+	*buffer = last;
 	return (line);
 }
 
 static t_list	*read_into_buffer(int fd, t_list **buffer)
 {
-	t_list	*curr;
-	t_list	*prev;
+	t_list	*node;
 	char	*content;
 	ssize_t	bread;
 
-	while (1)
+	bread = BUFFER_SIZE;
+	node = NULL;
+	while (bread == BUFFER_SIZE)
 	{
+		if (node)
+			ft_lstadd_back(buffer, node);
 		content = (char *)malloc(BUFFER_SIZE + 1);
 		if (!content)
 		{
@@ -71,17 +86,19 @@ static t_list	*read_into_buffer(int fd, t_list **buffer)
 		while (++bread < BUFFER_SIZE + 1)
 			content[bread] = 0;
 		bread = read(fd, content, BUFFER_SIZE);
-		curr = ft_lstnew(content);
-		if (!curr)
+		if (bread == 0)
+			break ;
+		node = ft_lstnew(content);
+		if (!node)
 		{
 			free(content);
 			ft_lstclear(buffer, free);
 			return (NULL);
 		}
-		if (strchr(content, '\n') || bread == 0)
-			return (curr);
-		ft_lstadd_back(buffer, curr);
+		if (strchr(content, '\n'))
+			break ;
 	}
+	return (node);
 }
 
 char	*get_next_line(int fd)
