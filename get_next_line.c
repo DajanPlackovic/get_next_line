@@ -73,7 +73,7 @@ static int	prep_buff(int fd, char **text, char **buff)
 		return (1);
 	}
 	if (*buff)
-    	free(*buff);
+		free(*buff);
 	*buff = ft_calloc_utils(BUFFER_SIZE + 1, 1);
 	if (!*buff)
 	{
