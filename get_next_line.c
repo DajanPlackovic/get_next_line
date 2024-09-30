@@ -119,7 +119,14 @@ char	*get_next_line(int fd)
 	char		*text;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	{
+		if (buff)
+		{
+			free(buff);
+			buff = NULL;
+		}
 		return (NULL);
+	}
 	if (!prep_text(&buff, &text))
 		return (NULL);
 	if (!prep_buff(fd, &text, &buff))
