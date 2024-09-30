@@ -60,7 +60,8 @@ char	*build_line(t_list **buffer, t_list *last)
 	}
 	line[j] = 0;
 	ft_lstclear(buffer, free);
-	*buffer = last;
+	if (strchr(last->content, '\n'))
+    	*buffer = last;
 	return (line);
 }
 
