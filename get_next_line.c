@@ -34,16 +34,14 @@ static int	read_file(int fd, char **buff, char **text)
 		*text = ft_strjoin_free(text, buff);
 		if (!*text)
 		{
-			if (*buff)
-				free(*buff);
+			free(*buff);
 			buff = NULL;
 			return (0);
 		}
 		if (ft_strchr_utils(*text, '\n'))
 			return (1);
 	}
-	if (*buff)
-		free(*buff);
+	free(*buff);
 	*buff = NULL;
 	return (1);
 }
@@ -55,8 +53,7 @@ static int	prep_text(char **buff, char **text)
 		*text = ft_substr_utils(*buff, 0, BUFFER_SIZE);
 		if (!*text)
 		{
-			if (*buff)
-				free(*buff);
+			free(*buff);
 			*buff = NULL;
 			return (0);
 		}
@@ -74,8 +71,7 @@ static int	prep_buff(int fd, char **text, char **buff)
 {
 	if (ft_strchr_utils(*text, '\n'))
 	{
-		if (*buff)
-			free(*buff);
+		free(*buff);
 		*buff = NULL;
 		return (1);
 	}
@@ -84,8 +80,7 @@ static int	prep_buff(int fd, char **text, char **buff)
 	*buff = ft_calloc_utils(BUFFER_SIZE + 1, 1);
 	if (!*buff)
 	{
-		if (*text)
-			free(*text);
+		free(*text);
 		return (0);
 	}
 	if (!read_file(fd, buff, text))
@@ -108,8 +103,7 @@ char	*extract_line(char **buff, char **text)
 			*buff = NULL;
 		else
 			*buff = ft_substr_utils(*text, nl_pos - *text + 1, BUFFER_SIZE);
-		if (*text)
-			free(*text);
+		free(*text);
 		return (line);
 	}
 	else
@@ -141,10 +135,8 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (text[0])
 		return (extract_line(&buff, &text));
-	if (text)
-		free(text);
-	if (buff)
-		free(buff);
+	free(text);
+	free(buff);
 	buff = NULL;
 	return (NULL);
 }
