@@ -99,7 +99,7 @@ char	*extract_line(char **buff, char **text)
 		line = ft_substr_utils(*text, 0, nl_pos - *text + 1);
 		if (*buff)
 			free(*buff);
-		if (!*(nl_pos + 1))
+		if (!line || !*(nl_pos + 1))
 			*buff = NULL;
 		else
 			*buff = ft_substr_utils(*text, nl_pos - *text + 1, BUFFER_SIZE);
