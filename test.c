@@ -1,10 +1,10 @@
+#include "libft.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
 char	*get_next_line(int fd);
-void	ft_putstr_fd(char *s, int fd);
 
 void	test(char *file)
 {
