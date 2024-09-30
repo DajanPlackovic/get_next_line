@@ -97,7 +97,8 @@ char	*extract_line(char **buff, char **text)
 	if (nl_pos)
 	{
 		line = ft_substr_utils(*text, 0, nl_pos - *text + 1);
-		free(*buff);
+		if (*buff)
+			free(*buff);
 		if (!*(nl_pos + 1))
 			*buff = NULL;
 		else
@@ -107,7 +108,8 @@ char	*extract_line(char **buff, char **text)
 	}
 	else
 	{
-		free(*buff);
+		if (*buff)
+			free(*buff);
 		*buff = NULL;
 		return (*text);
 	}
