@@ -25,6 +25,9 @@ static int	read_file(int fd, char **buff, char **text)
 	bread = 1;
 	while (bread > 0)
 	{
+		bread = -1;
+		while (++bread < BUFFER_SIZE)
+			(*buff)[bread] = 0;
 		bread = read(fd, *buff, BUFFER_SIZE);
 		if (!bread)
 			break ;
