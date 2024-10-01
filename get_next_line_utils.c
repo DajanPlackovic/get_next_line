@@ -92,7 +92,7 @@ char	*ft_strjoin_free(char **s1, char **s2)
 	out = (char *)ft_calloc_utils(total_len, 1);
 	if (!out)
 	{
-		free((void *)*s1);
+		free(*s1);
 		return (NULL);
 	}
 	i = -1;
