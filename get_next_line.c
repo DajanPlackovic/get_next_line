@@ -35,7 +35,7 @@ static int	read_file(int fd, char **buff, char **text)
 		if (!*text)
 		{
 			free(*buff);
-			buff = NULL;
+			*buff = NULL;
 			return (0);
 		}
 		if (ft_strchr_utils(*text, '\n'))
