@@ -30,20 +30,12 @@ static int	read_file(int fd, char **buff, char **text)
 			(*buff)[bread] = 0;
 		bread = read(fd, *buff, BUFFER_SIZE);
 		if (bread < 0)
-		{
-			free(*buff);
-			*buff = NULL;
 			return (0);
-		}
 		if (bread == 0)
 			break ;
 		*text = ft_strjoin_free(text, buff);
 		if (!*text)
-		{
-			free(*buff);
-			*buff = NULL;
 			return (0);
-		}
 		if (ft_strchr_utils(*text, '\n'))
 			return (1);
 	}
@@ -84,7 +76,11 @@ static int	prep_buff(int fd, char **text, char **buff)
 		return (0);
 	}
 	if (!read_file(fd, buff, text))
+	{
+		free(*buff);
+		*buff = NULL;
 		return (0);
+	}
 	return (1);
 }
 
