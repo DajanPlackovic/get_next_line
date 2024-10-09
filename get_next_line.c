@@ -31,8 +31,6 @@ static int	read_file(int fd, char **buff, char **text)
 		bread = read(fd, *buff, BUFFER_SIZE);
 		if (bread < 0)
 			return (0);
-		if (bread == 0)
-			break ;
 		*text = ft_strjoin_free(text, buff);
 		if (!*text)
 			return (0);
