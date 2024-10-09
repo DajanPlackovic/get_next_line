@@ -29,7 +29,13 @@ static int	read_file(int fd, char **buff, char **text)
 		while (++bread < BUFFER_SIZE)
 			(*buff)[bread] = 0;
 		bread = read(fd, *buff, BUFFER_SIZE);
-		if (!bread)
+		if (bread < 0)
+		{
+			free(*buff);
+			*buff = NULL;
+			return (0);
+		}
+		if (bread == 0)
 			break ;
 		*text = ft_strjoin_free(text, buff);
 		if (!*text)
@@ -69,12 +75,6 @@ static int	prep_text(char **buff, char **text)
 
 static int	prep_buff(int fd, char **text, char **buff)
 {
-	if (ft_strchr_utils(*text, '\n'))
-	{
-		free(*buff);
-		*buff = NULL;
-		return (1);
-	}
 	if (*buff)
 		free(*buff);
 	*buff = ft_calloc_utils(BUFFER_SIZE + 1, 1);
@@ -120,7 +120,7 @@ char	*get_next_line(int fd)
 	static char	*buff = NULL;
 	char		*text;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		if (buff)
 		{
