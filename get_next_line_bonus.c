@@ -12,11 +12,11 @@
 
 #include "get_next_line_bonus.h"
 
-size_t		ft_strlen_utils(const char *s);
-void		*ft_calloc_utils(size_t nmemb, size_t size);
-char		*ft_substr_utils(char const *s, unsigned int start, size_t len);
-char		*ft_strchr_utils(const char *s, char c);
-char		*ft_strjoin_free(char **s1, char **s2);
+size_t		ft_strlen(const char *s);
+void		*ft_calloc(size_t nmemb, size_t size);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
+char		*ft_strchr(const char *s, char c);
+char		*ft_strjoin(char **s1, char **s2);
 
 static int	read_file(int fd, char **buff, char **text)
 {
@@ -31,14 +31,14 @@ static int	read_file(int fd, char **buff, char **text)
 		bread = read(fd, *buff, BUFFER_SIZE);
 		if (!bread)
 			break ;
-		*text = ft_strjoin_free(text, buff);
+		*text = ft_strjoin(text, buff);
 		if (!*text)
 		{
 			free(*buff);
 			*buff = NULL;
 			return (0);
 		}
-		if (ft_strchr_utils(*text, '\n'))
+		if (ft_strchr(*text, '\n'))
 			return (1);
 	}
 	free(*buff);
@@ -50,7 +50,7 @@ static int	prep_text(char **buff, char **text)
 {
 	if (*buff)
 	{
-		*text = ft_substr_utils(*buff, 0, ft_strlen_utils(*buff));
+		*text = ft_substr(*buff, 0, ft_strlen(*buff));
 		if (!*text)
 		{
 			free(*buff);
@@ -60,7 +60,7 @@ static int	prep_text(char **buff, char **text)
 	}
 	else
 	{
-		*text = ft_calloc_utils(1, 1);
+		*text = ft_calloc(1, 1);
 		if (!*text)
 			return (0);
 	}
@@ -69,7 +69,7 @@ static int	prep_text(char **buff, char **text)
 
 static int	prep_buff(int fd, char **text, char **buff)
 {
-	if (ft_strchr_utils(*text, '\n'))
+	if (ft_strchr(*text, '\n'))
 	{
 		free(*buff);
 		*buff = NULL;
@@ -77,7 +77,7 @@ static int	prep_buff(int fd, char **text, char **buff)
 	}
 	if (*buff)
 		free(*buff);
-	*buff = ft_calloc_utils(BUFFER_SIZE + 1, 1);
+	*buff = ft_calloc(BUFFER_SIZE + 1, 1);
 	if (!*buff)
 	{
 		free(*text);
@@ -93,16 +93,16 @@ char	*extract_line(char **buff, char **text)
 	char	*nl_pos;
 	char	*line;
 
-	nl_pos = ft_strchr_utils(*text, '\n');
+	nl_pos = ft_strchr(*text, '\n');
 	if (nl_pos)
 	{
-		line = ft_substr_utils(*text, 0, nl_pos - *text + 1);
+		line = ft_substr(*text, 0, nl_pos - *text + 1);
 		if (*buff)
 			free(*buff);
 		if (!line || !*(nl_pos + 1))
 			*buff = NULL;
 		else
-			*buff = ft_substr_utils(*text, nl_pos - *text + 1, ft_strlen_utils(*text));
+			*buff = ft_substr(*text, nl_pos - *text + 1, ft_strlen(*text));
 		free(*text);
 		return (line);
 	}

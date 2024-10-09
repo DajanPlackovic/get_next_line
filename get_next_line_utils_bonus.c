@@ -12,7 +12,7 @@
 
 #include "get_next_line_bonus.h"
 
-size_t	ft_strlen_utils(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
@@ -22,7 +22,7 @@ size_t	ft_strlen_utils(const char *s)
 	return (i);
 }
 
-void	*ft_calloc_utils(size_t nmemb, size_t size)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
 	size_t			prod;
 	unsigned char	*out;
@@ -43,7 +43,7 @@ void	*ft_calloc_utils(size_t nmemb, size_t size)
 	return ((void *)out);
 }
 
-char	*ft_substr_utils(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*out;
 	size_t	slen;
@@ -51,10 +51,10 @@ char	*ft_substr_utils(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	slen = ft_strlen_utils(s);
+	slen = ft_strlen(s);
 	if (len > slen - start)
 		len = slen - start;
-	out = (char *)ft_calloc_utils(len + 1, 1);
+	out = (char *)ft_calloc(len + 1, 1);
 	if (!out)
 		return (NULL);
 	i = 0;
@@ -66,7 +66,7 @@ char	*ft_substr_utils(char const *s, unsigned int start, size_t len)
 	return (out);
 }
 
-char	*ft_strchr_utils(const char *s, char c)
+char	*ft_strchr(const char *s, char c)
 {
 	size_t	i;
 
@@ -78,7 +78,7 @@ char	*ft_strchr_utils(const char *s, char c)
 	return ((char *)(s + i));
 }
 
-char	*ft_strjoin_free(char **s1, char **s2)
+char	*ft_strjoin(char **s1, char **s2)
 {
 	char	*out;
 	int		s1_len;
@@ -87,9 +87,9 @@ char	*ft_strjoin_free(char **s1, char **s2)
 
 	if (!*s1 || !*s2)
 		return (NULL);
-	s1_len = ft_strlen_utils(*s1);
-	total_len = s1_len + ft_strlen_utils(*s2) + 1;
-	out = (char *)ft_calloc_utils(total_len, 1);
+	s1_len = ft_strlen(*s1);
+	total_len = s1_len + ft_strlen(*s2) + 1;
+	out = (char *)ft_calloc(total_len, 1);
 	if (!out)
 	{
 		free(*s1);
