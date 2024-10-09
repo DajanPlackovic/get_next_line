@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t		ft_strlen_utils(const char *s);
 void		*ft_calloc_utils(size_t nmemb, size_t size);
@@ -50,7 +50,7 @@ static int	prep_text(char **buff, char **text)
 {
 	if (*buff)
 	{
-		*text = ft_substr_utils(*buff, 0, BUFFER_SIZE);
+		*text = ft_substr_utils(*buff, 0, ft_strlen_utils(*buff));
 		if (!*text)
 		{
 			free(*buff);
@@ -102,7 +102,7 @@ char	*extract_line(char **buff, char **text)
 		if (!line || !*(nl_pos + 1))
 			*buff = NULL;
 		else
-			*buff = ft_substr_utils(*text, nl_pos - *text + 1, BUFFER_SIZE);
+			*buff = ft_substr_utils(*text, nl_pos - *text + 1, ft_strlen_utils(*text));
 		free(*text);
 		return (line);
 	}
