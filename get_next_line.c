@@ -77,6 +77,8 @@ static int	prep_buff(int fd, char **text, char **buff)
 	}
 	if (!read_file(fd, buff, text))
 	{
+		if (*text)
+			free(*text);
 		free(*buff);
 		*buff = NULL;
 		return (0);
